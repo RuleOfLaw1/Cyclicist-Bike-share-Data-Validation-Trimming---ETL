@@ -11,6 +11,16 @@ This repository contains a modular Python script (`etl_pipeline.py`) designed to
 3. **Clean & Engineer (`transform_and_clean_data`):** Converts timestamps, calculates ride durations in minutes/seconds, derives temporal feature tags, and filters out non-operational/short ride anomalies (< 60s).
 4. **Aggregate & Export (`generate_and_export_summaries`):** Constructs high-level summary matrices exported as lightweight CSVs for downstream BI dashboards (Tableau / PowerBI) or BigQuery analytical queries.
 
+### Key Features 
+Automated Extraction: Discovers local .zip archives or pre-extracted .csv datasets and handles uncompressing automatically.
+​Streamlined Ingestion: Dynamically locates and merges multi-file monthly datasets into a unified pandas DataFrame using memory-efficient list comprehensions.
+​Transformations & Data Hygiene:
+​Strict schema enforcement for safety.
+​Time-based metrics engineering (ride_length_sec, ride_length_min, day_of_the_week, month).
+​Automated data scrubbing (drops trips < 60s to remove system test rides/accidental docks).
+​Summary Exports: Generates granular KPI summaries (user, weekly, and monthly aggregation tables) ready for Tableau or SQL workflows.
+​Production Logging: Employs structured Python logging to trace step-by-step progress and raise descriptive errors. 
+
 ### Usage
 ```bash
 python etl_pipeline.py
